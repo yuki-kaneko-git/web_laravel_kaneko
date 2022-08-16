@@ -10,7 +10,7 @@
     <div class="insert">
         <form method="" action="">
             <table>
-                <tr><th>社員ID*</th><td><input type="text" placeholder="YZ12345678" pattern="^YZ\d{8}$" required title=""></td></tr>
+                <tr><th>社員ID*</th><td><input type="text" placeholder="YZ12345678" pattern="^YZ\d{8}$" required></td></tr>
                 <tr><th>社員名*</th>
                     <td>
                         <input type="text" placeholder="姓" maxlength="25" required>
