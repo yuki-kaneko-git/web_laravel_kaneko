@@ -10,22 +10,22 @@
             if(check.id.value == ""){
                 alert("社員IDを入力してください");
                 return false;
-            }else if(check.id.value == {10}){
+            }else if(!check.id.value.match({10})){
                 alert("社員IDは10文字で入力してください");
                 return false;
-            }else if(check.id.value == ^YZ\d$){
+            }else if(!check.id.value.match(^YZ\d$)){
                 alert("社員IDを正しく入力してください");
                 return false;
             }else if(check.lastNm.value == ""){
                 alert("社員名（姓）を入力してください");
                 return false;
-            }else if(check.lastNm.value == {, 25}){
+            }else if(!check.lastNm.value.match({, 25})){
                 alert("社員名（姓）は25文字以内で入力してください");
                 return false;
             }else if(check.firstNm.value == ""){
                 alert("社員名（名）を入力してください");
                 return false;
-            }else if(check.firstNm.value == {, 25}){
+            }else if(!check.firstNm.value.match({, 25})){
                 alert("社員名（名）は25文字以内で入力してください");
                 return false;
             }else if(check.section.value == ""){
@@ -34,10 +34,10 @@
             }else if(check.mail.value == ""){
                 alert("メールアドレスを入力してください");
                 return false;
-            }else if(check.mail.value == {, 256}){
+            }else if(!check.mail.value.match({, 256})){
                 alert("メールアドレスは256文字以内で入力してください");
                 return false;
-            }else if(check.mail.value == ^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$){
+            }else if(!check.mail.value.match(^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$)){
                 alert("メールアドレスを正しく入力してください");
                 return false;
             }else if(check.gender.value == ""){
