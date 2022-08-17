@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>社員登録画面</title>
+</head>
+<body>
     <script type="text/javascript">
         function check(){
             if(check.id.value == ""){
@@ -48,8 +50,6 @@
             }
         }
     </script>
-</head>
-<body>
     <div class="insert">
         <form method="" action="" name="check">
             <table>
