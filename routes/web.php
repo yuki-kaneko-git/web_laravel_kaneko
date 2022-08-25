@@ -26,3 +26,6 @@ Route::group(['prefix' => 'viewAll', 'as' => 'viewAll'], function(){
 Route::group(['prefix' => 'menu', 'as' => 'menu'], function(){
     Route::get('/', [App\Http\Controllers\MenuController::class, 'index']);
 });
+Route::group(['prefix' => 'insertResult', 'as' => 'insertResult'], function(){
+    Route::post('/', [App\Http\Controllers\InsertResultController::class, 'index']);
+});
