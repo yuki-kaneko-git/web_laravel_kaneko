@@ -8,84 +8,105 @@
 </head>
 <body>
     <div class="insert">
-        <form method="Post" action="{{route('insertResult')}}">
+        <form method="Post" action="{{route('insertResult')}}" name="form">
         @csrf
             <table>
-                <tr><th>社員ID*</th><td><input type="text" class="required length employee_id" name="employee_id" placeholder="YZ12345678" pattern="^YZ\d{8}$"></td></tr>
+                <tr><th>社員ID*</th><td><input type="text" id="employee_id" placeholder="YZ12345678" maxlength="10" minlength="10" required pattern ="^YZ\d{8}$"></td></tr>
                 <tr><th>社員名*</th>
                     <td>
-                        <input type="text" class="required maxlength" data-maxlength="25" name="family_name" placeholder="姓">
+                        <input type="text" id="family_name" placeholder="姓" maxlength="25" required>
                     </td>
                     <td>
-                        <input type="text" class="required maxlength" data-maxlength="25" name="first_name" placeholder="名">
+                        <input type="text" id="first_name" placeholder="名" maxlength="25" required>
                     </td>
                 </tr>
                 <tr><th>所属セクション*</th>
                     <td>
-                        <select name="section_id" class="required">
-                            <option hidden>選択してください</option>
+                        <select id="section_id" required>
+                            <option value="" hidden>選択してください</option>
                             <option value="1">シス開</option>
                             <option value="2">ビジソル</option>
                             <option value="3">グロカル</option>
                         </select> 
                     </td></tr>
-                <tr><th>メールアドレス*</th><td><input type="text" name="mail" class="required maxlength mail" data-maxlength="256" placeholder="taro_yaz@yaz.co.jp" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$"></td></tr>
+                <tr><th>メールアドレス*</th><td><input type="text" id="mail" placeholder="taro_yaz@yaz.co.jp" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$" maxlength="256" required></td></tr>
                 <tr><th>性別*</th>
                     <td>
-                        <label><input type="radio" name="gender_id" class="gende_id" value="1" required>男性</label>
-                        <label><input type="radio" name="gender_id" class="gende_id" value="2" required>女性</label>
+                        <label><input type="radio" name="gender" id="male" onchange="check_form()" value="1" required>男性</label>
+                        <label><input type="radio" name="gender" id="female" onchange="check_form()" value="2" required>女性</label>
                     </td>
                 </tr>
             </table>
             <p>*必須項目</p>
             <p></p>
-            <input type="submit" value="登録">
+            <input type="submit" name="submit" value="登録">
             <p></p>
             <a href="{{route('menu')}}">メニュー画面</a>
         </form>
-    </div>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            const validationForm = document.querySelectorAll('.validationForm');
-            if(validationForm) {
-                const errorClassName = 'error';
-                const requiredElems = document.querySelectorAll(' .required');
-                const employeeIdElems = document.querySelectorAll(' .employee_Id');
-                const familyNameElems = document.querySelectorAll(' .family_name');
-                const firstNameElems = document.querySelectorAll(' .first_name');
-                const sectionIdElems = document.querySelectorAll(' .section_id');
-                const mailElems = document.querySelectorAll(' .mail');
-                const genderIdElems = document.querySelectorAll(' .gender_id');
+        <script type="text/javascript">
+            var //form = document.forms.form, 
+                //submit = document.getElementByName('submit'),
+                employee_id = document.getElementById('employee_id');
+                family_name = document.getElementById('family_name');
+                first_name = document.getElementById('first_name');
+                section_id = document.getElementById('section_id');
+                mail = document.getElementById('mail');
+                male = document.getElementById('male');
+                female = document.getElementById('female');
 
-                const createEror = (elem, errorMessage) => {
-                    const errorSpan = document.createElement('span');
-                    errorSpan.classList.add(errorClassName);
-                    errorSpan.setAttribute('aria-live', 'polite');
-                    errorSpan.textContent = errorMessage;
-                    elem.parentNode.appendChild(errorSpan);
+            employee_id.addEventListener('invalid', function(e) {
+                if(employee_id.validity.valueMissing){
+                    e.target.setCustomValidity("社員IDを入力してください"); 
+                 } else if(employee_id.validity.tooLong || employee_id.validity.tooShort) {
+                     e.target.setCustomValidity("社員IDは10文字で入力してください"); 
+                 } else if(!employee_id.validity.valid) {
+                     e.target.setCustomValidity("社員IDを正しく入力してください"); 
+                 }
+                employee_id.addEventListener('input', function(e){
+                    e.target.setCustomValidity('');
+                });
+            }, false);
+            family_name.addEventListener('invalid', function(e) {
+                if(family_name.validity.valueMissing){
+                    e.target.setCustomValidity("社員名（姓）を入力してください"); 
+                } else if(family_name.validity.tooLong) {
+                    e.target.setCustomValidity("社員名（姓）は25文字以内で入力してください"); 
                 }
-
-                validationForm.addEventListener('sybmit', (e) => {
-                    const errorElems = validationForm.querySelectorAll('.' + errorClassName);
-                    errorElems.forEach( (elem) => {
-                        elem.move();
-                    })
-
-                    requiredElems.forEach( (elem) => {
-                        const elemValue = elem.value.trim();
-                        if(elemValue.length === 0) {
-                            createEror(elem, '入力は必須です');
-                            e.preventDefault();
-                        }
-                    })
-
-
-
-                    
-                })
-
-            }
-        })
-    </script>
+                family_name.addEventListener('input', function(e){
+                    e.target.setCustomValidity('');
+                });
+            }, false);
+            first_name.addEventListener('invalid', function(e) {
+                if(first_name.validity.valueMissing){
+                    e.target.setCustomValidity("社員名（名）を入力してください"); 
+                } else if(family_name.validity.tooLong) {
+                    e.target.setCustomValidity("社員名（名）は25文字以内で入力してください"); 
+                }
+                first_name.addEventListener('input', function(e){
+                    e.target.setCustomValidity('');
+                });
+            }, false);
+            section_id.addEventListener('invalid', function(e) {
+                if(section_id.validity.valueMissing){
+                    e.target.setCustomValidity("所属セクションを入力してください"); 
+                }
+                section_id.addEventListener('input', function(e){
+                    e.target.setCustomValidity('');
+                });
+            }, false);
+            mail.addEventListener('invalid', function(e) {
+                if(mail.validity.valueMissing){
+                    e.target.setCustomValidity("メールアドレスを入力してください"); 
+                } else if(mail.validity.tooLong) {
+                    e.target.setCustomValidity("メールアドレスは256文字以内で入力してください"); 
+                } else if(!mail.validity.valid) {
+                    e.target.setCustomValidity("メールアドレスを正しく入力してください"); 
+                }
+                mail.addEventListener('input', function(e){
+                    e.target.setCustomValidity('');
+                });
+             }, false);
+        </script>
+    </div>
 </body>
 </html>
