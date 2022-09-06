@@ -8,7 +8,7 @@
 
     $pdo = new PDO('pgsql:dbname=company_directory;options=\'--client_encoding=UTF8\';host=localhost', 'homestead', 'secret');
 
-
+    
 
     $stmt = $pdo->prepare("INSERT INTO employee (employee_id, family_name, first_name, section_id, mail, gender_id) VALUES (:employee_id, :family_name, :first_name, :section_id, :mail, :gender_id)");
     $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_STR);
